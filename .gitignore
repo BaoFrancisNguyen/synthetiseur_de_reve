@@ -1,2 +1,59 @@
 
 .venv
+secrets.toml
+config.toml
+*.pyc  
+__pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.env
+# Fichiers de configuration
+*.toml
+# Fichiers de cache
+.cache
+# Fichiers de test
+tests/
+# Fichiers de documentation
+docs/
+# Fichiers de build
+build/
+# Fichiers de distribution
+dist/
+# Fichiers de virtualenv
+.venv/
+# Fichiers de configuration IDE
+.idea/
+.vscode/
+# Fichiers de logs
+*.log
+# Fichiers de données temporaires
+*.tmp
+# Fichiers de sauvegarde
+*.bak
+# Fichiers de données sensibles
+*.env
+# Fichiers de données personnelles
+*.personal
+# Fichiers de données de configuration
+*.config
+# Fichiers de données de test
+*.test
+# Fichiers de données de production
+*.prod
+# Fichiers de données de développement
+*.dev
+# Fichiers de données de staging
+*.staging
+# Fichiers de données de préproduction
+*.preprod
+# Fichiers de données de production
+*.prod
+# Fichiers de données de test
+*.test
+# Fichiers de données de développement
+*.dev
+# Fichiers de données de staging
+*.staging
