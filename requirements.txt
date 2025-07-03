@@ -1,0 +1,39 @@
+# Synthétiseur de rêves - Dépendances Python
+# Version: 1.0.0
+# Date: 2025-07-03
+
+# Interface utilisateur
+streamlit>=1.35.0
+
+# Traitement audio et reconnaissance vocale
+SpeechRecognition>=3.10.0
+pyaudio>=0.2.11
+pydub>=0.25.1
+
+# Requêtes HTTP et APIs
+requests>=2.31.0
+httpx>=0.24.0
+
+# Traitement d'images
+Pillow>=10.0.0
+
+# Manipulation de données
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Formats de données
+pyyaml>=6.0
+toml>=0.10.2
+
+# Logging et debugging
+loguru>=0.7.0
+
+# Utilitaires
+pathlib2>=2.3.7
+typing-extensions>=4.7.0
+
+# Développement et tests (optionnel)
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
