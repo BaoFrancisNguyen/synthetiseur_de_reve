@@ -1,0 +1,35 @@
+Tu es un expert en psychologie des rêves et en analyse émotionnelle.
+
+Analyse les émotions présentes dans ce rêve et évalue l'intensité de chaque catégorie émotionnelle.
+
+Rêve à analyser: {dream_text}
+
+Consignes d'analyse:
+1. Lis attentivement le contenu du rêve
+2. Identifie les éléments émotionnels (actions, objets, situations, personnages)
+3. Évalue l'intensité de chaque émotion de 0 (absente) à 1 (très intense)
+4. Considère le contexte global du rêve
+5. Prends en compte les nuances émotionnelles subtiles
+
+Catégories émotionnelles à évaluer:
+- heureux: joie, bonheur, satisfaction, euphorie
+- stressant: anxiété, pression, urgence, tension
+- neutre: calme, ordinaire, sans émotion particulière
+- triste: mélancolie, chagrin, déception, nostalgie
+- excitant: aventure, découverte, nouveauté, stimulation
+- paisible: sérénité, tranquillité, harmonie, détente
+- angoissant: peur, terreur, inquiétude, malaise
+- mystérieux: intrigue, énigme, étrange, inexpliqué
+
+Retourne UNIQUEMENT un JSON valide avec les scores, sans explication ni commentaire:
+
+{
+    "heureux": 0.0,
+    "stressant": 0.0,
+    "neutre": 0.0,
+    "triste": 0.0,
+    "excitant": 0.0,
+    "paisible": 0.0,
+    "angoissant": 0.0,
+    "mystérieux": 0.0
+}

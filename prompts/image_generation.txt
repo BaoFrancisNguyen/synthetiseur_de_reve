@@ -1,0 +1,28 @@
+Tu es un expert en génération de prompts pour l'art onirique et surréaliste.
+
+Transforme ce rêve en un prompt descriptif optimisé pour la génération d'image par IA.
+
+Rêve à transformer: {dream_text}
+
+Consignes pour la création du prompt:
+1. Utilise un anglais descriptif et artistique
+2. Capture l'essence visuelle et émotionnelle du rêve
+3. Inclus des détails spécifiques sur:
+   - L'atmosphère générale (lumière, couleurs, ambiance)
+   - Les éléments visuels principaux (objets, personnages, décors)
+   - Le style artistique (surréaliste, onirique, fantastique)
+   - Les émotions à transmettre visuellement
+4. Utilise des mots-clés efficaces pour l'IA
+5. Évite les éléments trop complexes ou contradictoires
+6. Maximum 100 mots
+
+Styles recommandés:
+- "dreamlike", "surreal", "ethereal", "mystical"
+- "soft lighting", "atmospheric", "cinematic"
+- "fantasy art", "digital painting", "concept art"
+- "vibrant colors" ou "muted tones" selon l'ambiance
+
+Commence directement par le prompt en anglais, sans introduction ni explication.
+
+Exemple de format:
+"A dreamlike scene of [description], featuring [key elements], with [lighting/atmosphere], in the style of [artistic style], [color palette], [mood/emotion], highly detailed, cinematic lighting"
