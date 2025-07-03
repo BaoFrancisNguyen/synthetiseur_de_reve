@@ -1,0 +1,76 @@
+# Configuration du Synthétiseur de rêves
+# Date: 2025-07-03
+# Version: 1.0.0
+
+# Configuration des APIs
+apis:
+  groq:
+    url: "https://api.groq.com/openai/v1/chat/completions"
+    model: "llama3-8b-8192"
+    max_tokens: 150
+    temperature: 0.7
+    
+  mistral:
+    url: "https://api.mistral.ai/v1/chat/completions"
+    model: "mistral-tiny"
+    max_tokens: 200
+    temperature: 0.3
+    
+  clipdrop:
+    url: "https://clipdrop-api.co/text-to-image/v1"
+    image_size: "512x512"
+    format: "png"
+
+# Configuration de la reconnaissance vocale
+speech_recognition:
+  language: "fr-FR"
+  timeout: 10
+  phrase_time_limit: 60
+  energy_threshold: 300
+  
+# Configuration des émotions
+emotions:
+  categories:
+    - "heureux"
+    - "stressant"
+    - "neutre"
+    - "triste"
+    - "excitant"
+    - "paisible"
+    - "angoissant"
+    - "mystérieux"
+  
+  colors:
+    heureux: "#FFD700"      # Or
+    stressant: "#FF6B6B"    # Rouge
+    neutre: "#95A5A6"       # Gris
+    triste: "#3498DB"       # Bleu
+    excitant: "#E74C3C"     # Rouge vif
+    paisible: "#2ECC71"     # Vert
+    angoissant: "#8E44AD"   # Violet
+    mystérieux: "#34495E"   # Bleu foncé
+
+# Configuration du stockage
+storage:
+  dreams_file: "dreams_data.json"
+  images_folder: "dream_images"
+  max_dreams: 1000
+  
+# Configuration de l'interface
+ui:
+  title: "🌙 Synthétiseur de rêves"
+  theme: "dark"
+  sidebar_width: 300
+  
+# Configuration du logging
+logging:
+  level: "DEBUG"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "dream_synthesizer.log"
+  
+# Limites et quotas
+limits:
+  max_audio_duration: 300  # 5 minutes
+  max_text_length: 5000
+  max_image_size: 2048
+  rate_limit_per_hour: 100
