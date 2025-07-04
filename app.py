@@ -578,9 +578,10 @@ class DreamSynthesizer:
 
 
 
-    def generate_image(self, dream_text: str) -> Optional[Image.Image]:
+    def generate_image(self, dream_text: str) -> Tuple[Optional[Image.Image], str]:
         """
         Génère une image à partir du texte du rêve avec fallbacks multiples - VERSION AMÉLIORÉE.
+        Retourne l'image générée et le prompt utilisé.
         """
         logger.debug(f"🖼️ Génération d'image pour: {dream_text[:50]}...")
         
@@ -608,7 +609,7 @@ class DreamSynthesizer:
                 
                 if image:
                     logger.info(f"✅ Image générée avec succès via {method_name}")
-                    return image
+                    return image, image_prompt
                 else:
                     logger.warning(f"⚠️ {method_name} n'a pas produit d'image")
                     
@@ -618,7 +619,8 @@ class DreamSynthesizer:
         
         # Fallback final : placeholder amélioré
         logger.debug("🎨 Fallback final : génération d'une image placeholder améliorée")
-        return self.create_enhanced_placeholder_image(dream_text)
+        placeholder_image = self.create_enhanced_placeholder_image(dream_text)
+        return placeholder_image, image_prompt
 
     def _generate_clipdrop(self, prompt: str) -> Optional[Image.Image]:
         """Génère une image avec ClipDrop."""
@@ -1153,6 +1155,7 @@ class DreamSynthesizer:
     def save_dream(self, dream_data: Dict[str, Any]) -> bool:
         """
         Sauvegarde un rêve dans le stockage local (fichier JSON).
+        Inclut maintenant les prompts générés.
         """
         logger.debug(f"💾 Sauvegarde du rêve: {dream_data.get('title', 'Sans titre')}")
         
@@ -1167,6 +1170,13 @@ class DreamSynthesizer:
             else:
                 dreams = []
                 logger.debug("📝 Création d'un nouveau fichier de rêves")
+            
+            # Ajout de métadonnées supplémentaires
+            dream_data.update({
+                "id": dream_data.get("id", f"dream_{datetime.now().strftime('%Y%m%d_%H%M%S')}"),
+                "created_at": datetime.now().isoformat(),
+                "version": "1.0.0"
+            })
             
             # Ajout du nouveau rêve
             dreams.append(dream_data)
@@ -1807,6 +1817,12 @@ def display_dream_card(dream: Dict[str, Any]) -> None:
             else:
                 st.write(dream_text)
             
+            # Affichage du prompt s'il existe
+            if dream.get("image_prompt"):
+                with st.expander("🎯 Prompt utilisé pour l'image", expanded=False):
+                    st.code(dream["image_prompt"], language="text")
+                    st.caption("Prompt qui a généré l'image de ce rêve")
+            
             # Tags si disponibles
             if dream.get("tags"):
                 st.markdown("**🏷️ Tags:**")
@@ -1819,7 +1835,7 @@ def display_dream_card(dream: Dict[str, Any]) -> None:
             if image_path and Path(image_path).exists():
                 try:
                     image = Image.open(image_path)
-                    st.image(image, caption="Image du rêve", use_column_width=True)
+                    st.image(image, caption="Image du rêve", use_container_width=True)
                     
                     # Bouton de téléchargement de l'image
                     img_buffer = io.BytesIO()
@@ -1993,6 +2009,7 @@ def process_dream(synthesizer, dream_text: str) -> None:
     image = None
     video_path = None
     music_path = None
+    generated_prompt = None
     
     # Barre de progression
     progress_bar = st.progress(0)
@@ -2037,11 +2054,25 @@ def process_dream(synthesizer, dream_text: str) -> None:
                 status_text.text("🎨 Génération de l'image...")
                 progress_bar.progress(40)
                 
+                # Générer d'abord le prompt et l'afficher
+                generated_prompt = synthesizer.generate_image_prompt(dream_text)
+                
+                # Affichage du prompt généré
+                with st.expander("🎯 Prompt généré pour l'image", expanded=False):
+                    st.markdown("**Prompt utilisé par l'IA :**")
+                    st.code(generated_prompt, language="text")
+                    st.caption("Ce prompt a été optimisé pour créer une image artistique de votre rêve")
+                
+                # Générer l'image avec l'ancienne méthode pour l'instant
                 image = synthesizer.generate_image(dream_text)
+                
+                # Si generate_image retourne un tuple, on le gère
+                if isinstance(image, tuple):
+                    image, generated_prompt = image
                 
                 if image:
                     st.success("✅ Image générée!")
-                    st.image(image, caption="🌙 Votre rêve visualisé", use_column_width=True)
+                    st.image(image, caption="🌙 Votre rêve visualisé", use_container_width=True)
                     
                     # Bouton téléchargement
                     img_buffer = io.BytesIO()
@@ -2070,6 +2101,14 @@ def process_dream(synthesizer, dream_text: str) -> None:
             with st.spinner("🎬 Création de la vidéo..."):
                 status_text.text("🎬 Génération de la vidéo...")
                 progress_bar.progress(70)
+                
+                # Générer et afficher le prompt vidéo
+                video_prompt = synthesizer.generate_video_prompt(dream_text)
+                
+                with st.expander("🎬 Prompt généré pour la vidéo", expanded=False):
+                    st.markdown("**Prompt vidéo utilisé :**")
+                    st.code(video_prompt, language="text")
+                    st.caption("Ce prompt guide la création de votre vidéo onirique")
                 
                 # Sauvegarder temporairement l'image
                 temp_dir = Path("temp_images")
@@ -2115,6 +2154,14 @@ def process_dream(synthesizer, dream_text: str) -> None:
                 status_text.text("🎵 Génération de la musique...")
                 progress_bar.progress(90)
                 
+                # Générer et afficher le prompt musical
+                music_prompt = synthesizer.generate_music_prompt(dream_text)
+                
+                with st.expander("🎵 Prompt généré pour la musique", expanded=False):
+                    st.markdown("**Prompt musical utilisé :**")
+                    st.code(music_prompt, language="text")
+                    st.caption("Ce prompt guide la création de votre ambiance sonore")
+                
                 music_path = synthesizer.generate_music(dream_text)
                 
                 if music_path and Path(music_path).exists():
@@ -2142,7 +2189,7 @@ def process_dream(synthesizer, dream_text: str) -> None:
     progress_bar.progress(100)
     status_text.text("✅ Traitement terminé!")
     
-    # Résumé
+    # Résumé avec prompts utilisés
     st.markdown("---")
     st.subheader("✨ Votre création multimédia")
     
@@ -2163,6 +2210,22 @@ def process_dream(synthesizer, dream_text: str) -> None:
     
     with col_summary4:
         st.metric("⏱️ Temps", "~1-2 min")
+    
+    # Affichage de tous les prompts générés
+    if generated_prompt:
+        with st.expander("📋 Récapitulatif des prompts générés", expanded=False):
+            st.markdown("**🖼️ Prompt Image :**")
+            st.code(generated_prompt, language="text")
+            
+            if generate_video:
+                video_prompt = synthesizer.generate_video_prompt(dream_text)
+                st.markdown("**🎬 Prompt Vidéo :**")
+                st.code(video_prompt, language="text")
+            
+            if generate_music:
+                music_prompt = synthesizer.generate_music_prompt(dream_text)
+                st.markdown("**🎵 Prompt Musical :**")
+                st.code(music_prompt, language="text")
     
     # Bouton nouveau rêve
     if st.button("🆕 Créer un nouveau rêve", type="secondary"):
