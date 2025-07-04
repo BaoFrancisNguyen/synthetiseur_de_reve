@@ -1,5 +1,7 @@
 # 🌙 Synthétiseur de rêves
 
+Application déployée sur : https://synthetiseurdereve.streamlit.app/
+
 Une application innovante qui transforme vos rêves en créations artistiques multimédia grâce à l'intelligence artificielle. Racontez votre rêve en texte ou audio, et obtenez une image, une vidéo et une musique d'ambiance générées automatiquement.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
@@ -147,6 +149,7 @@ graph TD
     G --> J
     I --> J
 ```
+![alt text](diagram_reve.png)
 
 ### Système de fallbacks
 
@@ -173,7 +176,7 @@ L'application utilise un système robuste de fallbacks pour garantir le fonction
 
 ### 2. Explorer l'historique
 
-1. **Accédez à "📚 Historique"**
+1. **Accédez à "Historique"**
 2. **Utilisez les filtres** :
    - Émotion dominante
    - Période temporelle
@@ -183,7 +186,7 @@ L'application utilise un système robuste de fallbacks pour garantir le fonction
 
 ### 3. Configuration
 
-1. **Accédez à "⚙️ Configuration"**
+1. **Accédez à "Configuration"**
 2. **Vérifiez l'état des APIs**
 3. **Ajustez les paramètres** de génération
 4. **Gérez vos données** (export/import)
@@ -293,35 +296,17 @@ tail -f logs/app.log
 4. **Push** : `git push origin feature/nouvelle-fonctionnalite`
 5. **Créez une Pull Request**
 
-### Idées de contributions
 
-- 🌍 **Internationalisation** : Support multi-langues
-- 🎵 **Nouvelles APIs audio** : Suno, Udio, etc.
-- 🎬 **Amélioration vidéo** : RunwayML, Pika Labs
-- 📱 **Interface mobile** : Version responsive
-- 🤖 **Nouveaux modèles** : Support GPT-4, Claude, etc.
-- 📈 **Analytics avancés** : Graphiques plus poussés
-- 🎨 **Styles artistiques** : Sélection de styles prédéfinis
-
-## 📄 License
+## License
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
-## 🙏 Remerciements
-
-- **Streamlit** : Framework web Python
-- **Pollinations AI** : Génération d'images gratuite
-- **Groq** : Transcription audio rapide
-- **Mistral AI** : Analyse émotionnelle
-- **Communauté open-source** : Bibliothèques et outils
 
 ## 📞 Support
 
-- 📖 **Documentation** : [Wiki du projet](https://github.com/votre-username/dream-synthesizer/wiki)
-- 🐛 **Bugs** : [Issues GitHub](https://github.com/votre-username/dream-synthesizer/issues)
-- 💬 **Discussions** : [GitHub Discussions](https://github.com/votre-username/dream-synthesizer/discussions)
-- 📧 **Contact** : votre.email@example.com
+
+-  **Contact** : bao.francis.nguyen@gmail.com
 
 ---
 
-**Transformez vos rêves en art • Explorez votre inconscient • Créez des souvenirs visuels** 🌙✨
+**Transformez vos rêves en art • Explorez votre inconscient • Créez des souvenirs visuels**
