@@ -57,3 +57,10 @@ dist/
 *.dev
 # Fichiers de données de staging
 *.staging
+
+
+__pycache__/
+.pytest_cache/
+.vscode/
+
+venv/
