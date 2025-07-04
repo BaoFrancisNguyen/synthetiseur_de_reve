@@ -22,3 +22,6 @@ PyYAML>=5.4.0,<7.0.0
 
 # Modules Python built-in (pas besoin de les installer)
 # json, base64, io, logging, datetime, typing, os, pathlib, random, time, math
+
+pytest 
+Pillow
